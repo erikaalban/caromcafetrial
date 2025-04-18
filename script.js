@@ -554,7 +554,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const popupCloseBtn = document.querySelector(".close-popup");
 
     // Show popup
-    popup.style.display = "block";
+    popup.style.display = "flex";
 
     // Close popup when clicking the X
     if (popupCloseBtn) {
