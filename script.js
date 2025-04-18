@@ -743,4 +743,28 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleSection(card);
     });
   });
+
+  const header = document.querySelector("header");
+  const hero =
+    document.querySelector(".hero") || document.querySelector(".tables-hero"); // Get hero section
+
+  function updateHeader() {
+    if (hero) {
+      const heroHeight = hero.offsetHeight;
+      const scrollPosition = window.scrollY;
+
+      if (scrollPosition > heroHeight - 100) {
+        // Trigger slightly before end of hero
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    }
+  }
+
+  // Initial check
+  updateHeader();
+
+  // Add scroll event listener
+  window.addEventListener("scroll", updateHeader);
 });
