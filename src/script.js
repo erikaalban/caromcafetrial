@@ -746,7 +746,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const header = document.querySelector("header");
   const hero =
-    document.querySelector(".hero") || document.querySelector(".tables-hero"); // Get hero section
+    document.querySelector(".hero") ||
+    document.querySelector(".tables-hero") ||
+    document.querySelector(".menu-hero") ||
+    document.querySelector(".leagues-hero"); // Get hero section from any page
 
   function updateHeader() {
     if (hero) {
@@ -767,4 +770,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add scroll event listener
   window.addEventListener("scroll", updateHeader);
+
+  // Menu Carousel
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function moveSlide(n) {
+    showSlides((slideIndex += n));
+  }
+
+  function currentSlide(n) {
+    showSlides((slideIndex = n));
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("carousel-slide");
+    let dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+    }
+
+    for (i = 0; i < dots.length; i++) {
+      dots[i].classList.remove("active");
+    }
+
+    slides[slideIndex - 1].classList.add("active");
+    dots[slideIndex - 1].classList.add("active");
+  }
+
+  // Auto-advance slides every 5 seconds
+  setInterval(() => {
+    moveSlide(1);
+  }, 5000);
 });

@@ -15,8 +15,8 @@
       <div class="header-container">
         <a href="index.html" class="logo">
           <img
-            src="images/logo_white.png"
-            alt="Carom Caf&eacute; Billiards Logo"
+            src="images/common/logo_white.png"
+            alt="Carom Caf&eacute; Logo"
           />
         </a>
         <nav id="navbar">
@@ -32,8 +32,46 @@
       </div>
     </header>
 
+    <section class="leagues-hero">
+      <div class="carousel" data-slide-index="1">
+        <div class="carousel-slide active">
+          <img
+            src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=1200"
+            alt="Pool Tournament"
+          />
+          <div class="carousel-content">
+            <h2>Leagues & Tournaments</h2>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img
+            src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=1200"
+            alt="Carom Billiards"
+          />
+          <div class="carousel-content">
+            <h2>Leagues & Tournaments</h2>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img
+            src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=1200"
+            alt="Snooker Match"
+          />
+          <div class="carousel-content">
+            <h2>Leagues & Tournaments</h2>
+          </div>
+        </div>
+        <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
+        <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
+        <div class="dots">
+          <span class="dot active" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+      </div>
+    </section>
+
     <section class="leagues">
-      <h2>Leagues & Tournaments</h2>
       <div class="leagues-content">
         <div class="league-info">
           <h3>Weekly Leagues</h3>
@@ -93,5 +131,45 @@
     </footer>
 
     <script src="src/script.js"></script>
+    <script>
+      // Make carousel controls work
+      window.moveSlide = function (n) {
+        const slideIndexElement = document.querySelector(".carousel");
+        let slideIndex = parseInt(
+          slideIndexElement.getAttribute("data-slide-index") || 1
+        );
+        showSlides((slideIndex += n));
+      };
+
+      window.currentSlide = function (n) {
+        showSlides(n);
+      };
+
+      function showSlides(n) {
+        let slides = document.getElementsByClassName("carousel-slide");
+        let dots = document.getElementsByClassName("dot");
+        const slideIndexElement = document.querySelector(".carousel");
+
+        if (n > slides.length) {
+          n = 1;
+        }
+        if (n < 1) {
+          n = slides.length;
+        }
+
+        slideIndexElement.setAttribute("data-slide-index", n);
+
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].classList.remove("active");
+        }
+
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].classList.remove("active");
+        }
+
+        slides[n - 1].classList.add("active");
+        dots[n - 1].classList.add("active");
+      }
+    </script>
   </body>
 </html>
