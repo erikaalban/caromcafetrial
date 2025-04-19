@@ -188,7 +188,7 @@ header.scrolled .mobile-nav-toggle {
   position: relative;
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.01)),
-    url("gallery_photos/gmainarea.jpg");
+    url("../images/gmainarea.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
