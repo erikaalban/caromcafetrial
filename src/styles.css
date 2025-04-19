@@ -188,7 +188,7 @@ header.scrolled .mobile-nav-toggle {
   position: relative;
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.01)),
-    url("../images/gmainarea.jpg");
+    url("../images/main_dining_area.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -303,9 +303,9 @@ header.scrolled .mobile-nav-toggle {
   right: 0;
   bottom: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url("gpool.jpg") center 0% / 100%,
-    url("gallery_photos/gcarom.jpg") center 33% / 100%,
-    url("gallery_photos/gsnooker.jpg") center 66% / 100%;
+    url("../images/pool_tables.jpg") center 0% / 100%,
+    url("../images/carom_tables.jpg") center 33% / 100%,
+    url("../images/snooker_tables.jpg") center 66% / 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: 1;
@@ -869,7 +869,7 @@ footer {
 .footer-content {
   display: flex;
   justify-content: space-between;
-  gap: 150px;
+  gap: 150px; /* Increased gap to 150px for desktop view */
   margin-bottom: 30px;
 }
 
@@ -918,6 +918,34 @@ footer {
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-hours {
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 40px; /* Maintain 40px gap in mobile view */
+  }
+
+  .footer-info {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-map {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo,
+  .footer-hours {
+    width: 100%;
+  }
 }
 
 /* Responsive Design */
