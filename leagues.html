@@ -11,7 +11,20 @@
     />
     <style>
       .leagues-hero {
-        height: 75vh; /* Exactly 3/4 of the viewport height */
+        height: 85vh; /* Increased from 75vh to 85vh for more vertical space */
+        background-color: #000; /* Dark background for any letterboxing */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* For the hero video */
+      .leagues-hero-video {
+        width: 100%; /* Ensure full width */
+        height: auto; /* Auto height to maintain aspect ratio */
+        max-height: 100%; /* Don't exceed container height */
+        object-fit: cover; /* Cover the area without stretching */
       }
 
       /* Fix for cropping issues on specific images */
@@ -63,45 +76,17 @@
     </header>
 
     <section class="leagues-hero">
-      <div class="carousel" data-slide-index="1">
-        <div class="carousel-slide active gallery-slide">
-          <div class="gallery-grid">
-            <img
-              src="images/leagues/tournament_group1.jpg"
-              alt="Carom Cafe Tournament Group"
-            />
-            <img
-              src="images/leagues/tournament_group2.jpg"
-              alt="Carom Cafe League Players"
-            />
-            <img
-              src="images/leagues/billiards_hall.jpg"
-              alt="Carom Cafe Billiards Hall"
-            />
-          </div>
-        </div>
-        <div class="carousel-slide gallery-slide">
-          <div class="gallery-grid">
-            <img src="images/leagues/gallery_1.jpg" alt="Gallery Image 1" />
-            <img src="images/leagues/gallery_2.jpg" alt="Gallery Image 2" />
-            <img src="images/leagues/gallery_3.jpg" alt="Gallery Image 3" />
-          </div>
-        </div>
-        <div class="carousel-slide gallery-slide">
-          <div class="gallery-grid">
-            <img src="images/leagues/gallery_4.jpg" alt="Gallery Image 4" />
-            <img src="images/leagues/gallery_5.jpg" alt="Gallery Image 5" />
-            <img src="images/leagues/gallery_6.jpg" alt="Gallery Image 6" />
-          </div>
-        </div>
-        <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
-        <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
-        <div class="dots">
-          <span class="dot active" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-      </div>
+      <video
+        id="leagues-video"
+        class="leagues-hero-video"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src="images/leagues/break.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </section>
 
     <section class="leagues-heading-section">
@@ -221,6 +206,14 @@
         slides[n - 1].classList.add("active");
         dots[n - 1].classList.add("active");
       }
+
+      // Set video playback speed
+      document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("leagues-video");
+        if (video) {
+          video.playbackRate = 0.6; // Slow down to 60% of normal speed
+        }
+      });
     </script>
   </body>
 </html>
