@@ -17,6 +17,7 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        position: relative;
       }
 
       /* For the hero video */
@@ -25,13 +26,85 @@
         height: auto; /* Auto height to maintain aspect ratio */
         max-height: 100%; /* Don't exceed container height */
         object-fit: cover; /* Cover the area without stretching */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
       }
 
-      /* Fix for cropping issues on specific images */
-      .gallery-grid img[src="images/leagues/gallery_3.jpg"],
-      .gallery-grid img[src="images/leagues/gallery_6.jpg"] {
+      /* For the hero images (initially hidden) */
+      .leagues-hero-image {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        object-position: center top; /* Position from the top to show faces */
+        opacity: 0;
+        transition: opacity 1s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+
+      /* When image is active */
+      .leagues-hero-image.active {
+        opacity: 1;
+        z-index: 2;
+      }
+
+      /* Slideshow navigation buttons */
+      .slide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 32px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, text-shadow 0.3s ease;
+        padding: 20px;
+      }
+
+      .slide-btn:hover {
+        transform: translateY(-50%) scale(1.2);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+      }
+
+      .slide-btn.prev {
+        left: 20px;
+      }
+
+      .slide-btn.next {
+        right: 20px;
+      }
+
+      /* Dots for slideshow navigation */
+      .dots {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .dot.active {
+        background-color: white;
       }
 
       /* Style to match the About Carom Café heading */
@@ -80,13 +153,35 @@
         id="leagues-video"
         class="leagues-hero-video"
         autoplay
-        loop
         muted
         playsinline
       >
         <source src="images/leagues/break.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <img
+        id="leagues-image-1"
+        src="images/leagues/billiards_hall.jpg"
+        alt="Carom Cafe Billiards Hall"
+        class="leagues-hero-image"
+      />
+      <img
+        id="leagues-image-2"
+        src="images/leagues/tournament_group2.jpg"
+        alt="Carom Cafe Tournament Group"
+        class="leagues-hero-image"
+      />
+
+      <!-- Navigation buttons -->
+      <button class="slide-btn prev" onclick="previousSlide()">❮</button>
+      <button class="slide-btn next" onclick="nextSlide()">❯</button>
+
+      <!-- Dots -->
+      <div class="dots">
+        <span class="dot active" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+      </div>
     </section>
 
     <section class="leagues-heading-section">
@@ -168,7 +263,130 @@
 
     <script src="src/script.js"></script>
     <script>
-      // Make carousel controls work
+      // Global variables for slideshow
+      let slides;
+      let currentSlide = 0;
+      let slideTimer;
+
+      // Set up slideshow between video and images
+      document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("leagues-video");
+        const image1 = document.getElementById("leagues-image-1");
+        const image2 = document.getElementById("leagues-image-2");
+        slides = [video, image1, image2];
+
+        // Set video to play at slower speed
+        video.playbackRate = 0.6;
+
+        // When video ends, auto advance to next slide
+        video.addEventListener("ended", function () {
+          nextSlide();
+        });
+
+        // Initialize the slideshow
+        updateSlideInfo();
+        startSlideTimer();
+      });
+
+      // Function to update dots and current slide info
+      function updateSlideInfo() {
+        // Update dots
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+
+      // Function to start the slide timer
+      function startSlideTimer() {
+        clearTimeout(slideTimer);
+
+        // Set timeout based on current slide
+        const timeoutDuration =
+          currentSlide === 0
+            ? slides[0].duration * 1000 // Video duration
+            : 7000; // 7 seconds for images
+
+        slideTimer = setTimeout(nextSlide, timeoutDuration);
+      }
+
+      // Go to next slide
+      function nextSlide() {
+        // Hide current slide
+        if (currentSlide !== 0) {
+          // If current slide is an image, hide it
+          slides[currentSlide].classList.remove("active");
+        } else {
+          // If current slide is video, pause it
+          slides[0].pause();
+        }
+
+        // Advance to next slide
+        currentSlide = (currentSlide + 1) % slides.length;
+
+        // Show new slide
+        showCurrentSlide();
+      }
+
+      // Go to previous slide
+      function previousSlide() {
+        // Hide current slide
+        if (currentSlide !== 0) {
+          // If current slide is an image, hide it
+          slides[currentSlide].classList.remove("active");
+        } else {
+          // If current slide is video, pause it
+          slides[0].pause();
+        }
+
+        // Move to previous slide
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+
+        // Show new slide
+        showCurrentSlide();
+      }
+
+      // Go directly to a specific slide
+      function goToSlide(index) {
+        if (index === currentSlide) return;
+
+        // Hide current slide
+        if (currentSlide !== 0) {
+          // If current slide is an image, hide it
+          slides[currentSlide].classList.remove("active");
+        } else {
+          // If current slide is video, pause it
+          slides[0].pause();
+        }
+
+        // Set new slide index
+        currentSlide = index;
+
+        // Show new slide
+        showCurrentSlide();
+      }
+
+      // Show the current slide
+      function showCurrentSlide() {
+        if (currentSlide === 0) {
+          // If slide is video, reset and play it
+          slides[0].currentTime = 0;
+          slides[0].play();
+        } else {
+          // If slide is image, show it
+          slides[currentSlide].classList.add("active");
+        }
+
+        // Update dots and start timer
+        updateSlideInfo();
+        startSlideTimer();
+      }
+
+      // Carousel controls (if needed elsewhere)
       window.moveSlide = function (n) {
         const slideIndexElement = document.querySelector(".carousel");
         let slideIndex = parseInt(
@@ -206,14 +424,6 @@
         slides[n - 1].classList.add("active");
         dots[n - 1].classList.add("active");
       }
-
-      // Set video playback speed
-      document.addEventListener("DOMContentLoaded", function () {
-        const video = document.getElementById("leagues-video");
-        if (video) {
-          video.playbackRate = 0.6; // Slow down to 60% of normal speed
-        }
-      });
     </script>
   </body>
 </html>
