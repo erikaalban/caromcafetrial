@@ -11,7 +11,7 @@
     />
     <style>
       .leagues-hero {
-        height: 75vh; /* 3/4 of the viewport height */
+        height: 85vh; /* Between 3/4 (75vh) and full (100vh) page height */
       }
 
       /* Fix for cropping issues on specific images */
@@ -19,6 +19,21 @@
       .gallery-grid img[src="images/leagues/gallery_6.jpg"] {
         object-fit: cover;
         object-position: center top; /* Position from the top to show faces */
+      }
+
+      /* Style to match the About Carom Café heading */
+      .leagues-heading {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        text-align: center;
+        margin: 0;
+        padding-top: 100px;
+        margin-bottom: 40px;
+      }
+
+      /* Add spacing to match the about section on home page */
+      .leagues {
+        padding: 0 40px 100px 40px;
       }
     </style>
   </head>
@@ -89,7 +104,6 @@
     <h2 class="leagues-heading">Leagues & Tournaments</h2>
 
     <section class="leagues">
-      <h2 class="leagues-title">Join Our Leagues & Tournaments</h2>
       <div class="leagues-content">
         <div class="league-info">
           <h3>Weekly Leagues</h3>
