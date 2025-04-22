@@ -13,6 +13,13 @@
       .leagues-hero {
         height: 75vh; /* 3/4 of the viewport height */
       }
+
+      /* Fix for cropping issues on specific images */
+      .gallery-grid img[src="images/leagues/gallery_3.jpg"],
+      .gallery-grid img[src="images/leagues/gallery_6.jpg"] {
+        object-fit: cover;
+        object-position: center top; /* Position from the top to show faces */
+      }
     </style>
   </head>
   <body>
