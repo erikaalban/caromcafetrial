@@ -9,6 +9,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <style>
+      .leagues-hero {
+        height: 75vh; /* 3/4 of the viewport height */
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -49,9 +54,6 @@
               alt="Carom Cafe Billiards Hall"
             />
           </div>
-          <div class="carousel-content">
-            <h2>Leagues & Tournaments</h2>
-          </div>
         </div>
         <div class="carousel-slide gallery-slide">
           <div class="gallery-grid">
@@ -59,18 +61,12 @@
             <img src="images/leagues/gallery_2.jpg" alt="Gallery Image 2" />
             <img src="images/leagues/gallery_3.jpg" alt="Gallery Image 3" />
           </div>
-          <div class="carousel-content">
-            <h2>Leagues & Tournaments</h2>
-          </div>
         </div>
         <div class="carousel-slide gallery-slide">
           <div class="gallery-grid">
             <img src="images/leagues/gallery_4.jpg" alt="Gallery Image 4" />
             <img src="images/leagues/gallery_5.jpg" alt="Gallery Image 5" />
             <img src="images/leagues/gallery_6.jpg" alt="Gallery Image 6" />
-          </div>
-          <div class="carousel-content">
-            <h2>Leagues & Tournaments</h2>
           </div>
         </div>
         <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
@@ -82,6 +78,8 @@
         </div>
       </div>
     </section>
+
+    <h2 class="leagues-heading">Leagues & Tournaments</h2>
 
     <section class="leagues">
       <h2 class="leagues-title">Join Our Leagues & Tournaments</h2>
