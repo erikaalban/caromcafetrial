@@ -61,7 +61,6 @@
       /* Categories styling to match home page */
       .leagues-categories {
         padding: 40px 0;
-        background-color: white;
       }
 
       .leagues-container {
@@ -74,7 +73,6 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 30px;
-        margin-bottom: 40px;
       }
 
       .league-card {
@@ -153,9 +151,13 @@
       }
 
       /* Section for the heading with proper spacing */
+      .leagues-heading-section:first-of-type {
+        padding-top: 100px;
+        margin-top: 40px;
+      }
+
       .leagues-heading-section {
-        padding: 60px 40px 0 40px;
-        background-color: white;
+        padding: 100px 40px 0 40px;
       }
 
       /* Section divider */
@@ -188,7 +190,7 @@
       }
     </style>
   </head>
-  <body>
+  <body style="background-color: var(--gray-color)">
     <header>
       <div class="header-container">
         <a href="index.html" class="logo">
@@ -226,7 +228,10 @@
       <h2 class="leagues-heading">Leagues</h2>
     </section>
 
-    <section class="leagues-categories">
+    <section
+      class="leagues-categories"
+      style="background-color: var(--gray-color)"
+    >
       <div class="leagues-container">
         <div class="leagues-grid">
           <div class="league-card">
@@ -275,13 +280,14 @@
       </div>
     </section>
 
-    <div class="section-divider"></div>
-
     <section class="leagues-heading-section">
       <h2 class="leagues-heading">Tournaments</h2>
     </section>
 
-    <section class="leagues-categories">
+    <section
+      class="leagues-categories"
+      style="background-color: var(--gray-color)"
+    >
       <div class="leagues-container">
         <div class="leagues-grid">
           <div class="league-card">
