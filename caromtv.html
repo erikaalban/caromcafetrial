@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carom Caf&eacute; Billiards - Carom TV</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .caromtv-hero {
+        height: 75vh; /* 3/4 of the viewport height */
+        background-color: #000; /* Dark background for any letterboxing */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Hero image styling */
+      .caromtv-hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Add overlay text to hero image */
+      .hero-overlay {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+      }
+
+      .hero-overlay h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+
+      .hero-overlay p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Style to match other page headings */
+      .caromtv-heading {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      /* Section for the heading with proper spacing */
+      .caromtv-heading-section {
+        padding: 40px 40px 0 40px;
+      }
+
+      /* Content section styling */
+      .caromtv-content {
+        padding: 0 40px 100px 40px;
+      }
+
+      /* Live stream section */
+      .live-stream {
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .live-stream h3 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .stream-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        aspect-ratio: 16/9;
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .upcoming-events {
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+
+      .events-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .events-table th,
+      .events-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .events-table th {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .events-table tr:hover {
+        background-color: #f5f5f5;
+      }
+
+      .event-live {
+        background-color: #ffebee;
+      }
+
+      .live-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        background-color: #e53935;
+        color: white;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin-left: 10px;
+      }
+
+      /* Video gallery styling */
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .video-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .video-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .video-thumbnail {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 aspect ratio */
+        background-color: #000;
+        overflow: hidden;
+      }
+
+      .video-thumbnail img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .video-info {
+        padding: 20px;
+      }
+
+      .video-info h3 {
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+        color: var(--dark-color);
+      }
+
+      .video-info p {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .video-meta {
+        display: flex;
+        justify-content: space-between;
+        color: #999;
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
+
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(188, 18, 18, 0.8);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .play-button:hover {
+        background: rgba(188, 18, 18, 1);
+      }
+
+      /* Featured players */
+      .featured-players {
+        margin-top: 60px;
+      }
+
+      .players-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .player-card {
+        width: 220px;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .player-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .player-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .player-info {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .player-info h3 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+      }
+
+      .player-info p {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .player-stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        font-size: 0.8rem;
+        color: #666;
+      }
+
+      .stat-number {
+        color: var(--primary-color);
+        font-weight: bold;
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      /* Newsletter signup */
+      .newsletter {
+        margin-top: 60px;
+        background-color: #f8f8f8;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .newsletter-form {
+        display: flex;
+        max-width: 500px;
+        margin: 20px auto 0;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px 0 0 4px;
+        font-size: 1rem;
+      }
+
+      .newsletter-form button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 0 4px 4px 0;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .newsletter-form button:hover {
+        background-color: #a50f0f;
+      }
+
+      @media (max-width: 768px) {
+        .hero-overlay h1 {
+          font-size: 2rem;
+        }
+
+        .hero-overlay p {
+          font-size: 1rem;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .newsletter-form input {
+          border-radius: 4px;
+          margin-bottom: 10px;
+        }
+
+        .newsletter-form button {
+          border-radius: 4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <img
+            src="images/common/logo_white.png"
+            alt="Carom Caf&eacute; Logo"
+          />
+        </a>
+        <nav id="navbar">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="leagues.html">Leagues</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="caromtv.html" class="active">Carom TV</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-nav-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </header>
+
+    <section class="caromtv-hero">
+      <img
+        src="images/index/billiards_hall.jpg"
+        alt="Carom Cafe Billiards Hall"
+        class="caromtv-hero-image"
+      />
+      <div class="hero-overlay">
+        <h1>Carom TV</h1>
+        <p>
+          Watch live streams and recorded videos of professional 3-cushion
+          billiards matches and tournaments
+        </p>
+      </div>
+    </section>
+
+    <section class="caromtv-heading-section">
+      <h2 class="caromtv-heading">Welcome to Carom TV</h2>
+    </section>
+
+    <section class="caromtv-content">
+      <div class="container">
+        <p style="text-align: center; margin-bottom: 30px">
+          Your premier destination for professional 3-cushion billiards content.
+          Watch live matches, tournament highlights, instructional videos, and
+          player interviews from Carom Café Billiards.
+        </p>
+
+        <div class="live-stream">
+          <h3>Live Stream</h3>
+          <div class="stream-container">
+            <img
+              src="images/leagues/tournament_group1.jpg"
+              alt="Live Tournament Stream"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+            <div
+              style="
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                background-color: red;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+              "
+            >
+              LIVE
+            </div>
+          </div>
+          <p style="margin-top: 20px">
+            <strong>Now Playing:</strong> 2025 New York Carom Championship -
+            Semifinal Match
+          </p>
+        </div>
+
+        <div class="upcoming-events">
+          <h3 class="caromtv-heading">Upcoming Events</h3>
+          <table class="events-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Event</th>
+                <th>Players</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="event-live">
+                <td>May 15, 2025</td>
+                <td>New York Carom Championship - Semifinal</td>
+                <td>Daniel Martinez vs. Richard Lee</td>
+                <td><span class="live-badge">LIVE</span></td>
+              </tr>
+              <tr>
+                <td>May 15, 2025</td>
+                <td>New York Carom Championship - Semifinal</td>
+                <td>John Kim vs. Thomas Wilson</td>
+                <td>8:00 PM</td>
+              </tr>
+              <tr>
+                <td>May 16, 2025</td>
+                <td>New York Carom Championship - Final</td>
+                <td>TBD vs. TBD</td>
+                <td>7:00 PM</td>
+              </tr>
+              <tr>
+                <td>May 20, 2025</td>
+                <td>Weekly 3-Cushion Tournament</td>
+                <td>Open Registration</td>
+                <td>7:00 PM</td>
+              </tr>
+              <tr>
+                <td>June 5-8, 2025</td>
+                <td>East Coast Carom Championship</td>
+                <td>Multiple Players</td>
+                <td>All Day</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="caromtv-heading">Featured Videos</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <img
+                src="images/index/billiards_hall.jpg"
+                alt="3-Cushion Tournament Final"
+              />
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>3-Cushion Tournament Final</h3>
+              <p>
+                Watch the exciting final match from our latest 3-cushion
+                tournament featuring top players competing for the championship.
+              </p>
+              <div class="video-meta">
+                <span>1.2K views</span>
+                <span>May 8, 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <img
+                src="images/index/pool_tables.jpg"
+                alt="Carom Fundamentals"
+              />
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Carom Fundamentals</h3>
+              <p>
+                Learn the basics of carom billiards with our tutorial series for
+                beginners. Master the essential techniques and strategies.
+              </p>
+              <div class="video-meta">
+                <span>3.4K views</span>
+                <span>Apr 22, 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <img src="images/index/snooker.jpg" alt="Advanced Shot Making" />
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Advanced Shot Making</h3>
+              <p>
+                Master advanced techniques with tips from professional players.
+                Improve your positioning and cushion shots.
+              </p>
+              <div class="video-meta">
+                <span>2.1K views</span>
+                <span>Apr 15, 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumbnail">
+              <img
+                src="images/leagues/tournament_group2.jpg"
+                alt="Monthly Tournament Highlights"
+              />
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>Monthly Tournament Highlights</h3>
+              <p>
+                The best moments from our April 2025 tournament series featuring
+                international players and incredible shots.
+              </p>
+              <div class="video-meta">
+                <span>5.7K views</span>
+                <span>Apr 30, 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-players">
+          <h3 class="caromtv-heading">Featured Players</h3>
+          <div class="players-row">
+            <div class="player-card">
+              <img
+                src="images/leagues/tournament_group2.jpg"
+                alt="Daniel Martinez"
+                class="player-image"
+              />
+              <div class="player-info">
+                <h3>Daniel Martinez</h3>
+                <p>New York Champion</p>
+                <p>3-Cushion Specialist</p>
+                <div class="player-stats">
+                  <div>
+                    <span class="stat-number">24</span>
+                    Tournaments
+                  </div>
+                  <div>
+                    <span class="stat-number">1.523</span>
+                    Average
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="player-card">
+              <img
+                src="images/leagues/tournament_group1.jpg"
+                alt="Richard Lee"
+                class="player-image"
+              />
+              <div class="player-info">
+                <h3>Richard Lee</h3>
+                <p>East Coast Champion</p>
+                <p>All-Around Player</p>
+                <div class="player-stats">
+                  <div>
+                    <span class="stat-number">31</span>
+                    Tournaments
+                  </div>
+                  <div>
+                    <span class="stat-number">1.356</span>
+                    Average
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="player-card">
+              <img
+                src="images/index/snooker.jpg"
+                alt="John Kim"
+                class="player-image"
+              />
+              <div class="player-info">
+                <h3>John Kim</h3>
+                <p>Rising Star</p>
+                <p>Technical Specialist</p>
+                <div class="player-stats">
+                  <div>
+                    <span class="stat-number">18</span>
+                    Tournaments
+                  </div>
+                  <div>
+                    <span class="stat-number">1.211</span>
+                    Average
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="player-card">
+              <img
+                src="images/index/billiards_hall.jpg"
+                alt="Thomas Wilson"
+                class="player-image"
+              />
+              <div class="player-info">
+                <h3>Thomas Wilson</h3>
+                <p>Veteran Player</p>
+                <p>Power Shot Expert</p>
+                <div class="player-stats">
+                  <div>
+                    <span class="stat-number">47</span>
+                    Tournaments
+                  </div>
+                  <div>
+                    <span class="stat-number">1.489</span>
+                    Average
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="newsletter">
+          <h3>Stay Updated</h3>
+          <p>
+            Subscribe to our newsletter to receive updates about upcoming
+            tournaments, live streams, and new videos.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2150199999997!2d-73.8275!3d40.7583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2600b0b0b0b0b%3A0x0b0b0b0b0b0b0b0b!2sCarom%20Cafe%20Billiards!5e0!3m2!1sen!2sus!4v1234567890!5m2!1sen!2sus"
+              width="100%"
+              height="200"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            >
+            </iframe>
+          </div>
+          <div class="footer-info">
+            <div class="footer-logo">
+              <h3>Carom Caf&eacute; Billiards</h3>
+              <p>
+                3402 Linden Pl<br />Flushing, NY 11354<br />Phone: (718)
+                358-8585
+              </p>
+            </div>
+            <div class="footer-hours">
+              <h3>Hours</h3>
+              <p>
+                Mon: 10:00 AM - 4:00 AM<br />Tue - Thu: 10:00 AM - 2:00 AM<br />Fri:
+                10:00 AM - 3:00 AM<br />Sat: 9:00 AM - 3:00 AM<br />Sun: 9:00 AM
+                - 2:00 AM
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Carom Caf&eacute; Billiards. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="src/script.js"></script>
+  </body>
+</html>
