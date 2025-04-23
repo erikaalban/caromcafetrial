@@ -11,7 +11,119 @@
     />
     <style>
       .menu-hero {
-        height: 75vh; /* Exactly 3/4 of the viewport height */
+        height: 100vh; /* Full viewport height */
+        background-color: #000; /* Dark background for any letterboxing */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        margin: 0;
+      }
+
+      /* Update carousel slides to fill the hero area */
+      .carousel {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      /* Slideshow navigation buttons */
+      .slide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+        border: none;
+        font-size: 32px;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+      }
+
+      .slide-btn:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      .slide-btn.prev {
+        left: 20px;
+      }
+
+      .slide-btn.next {
+        right: 20px;
+      }
+
+      /* Dots for slideshow navigation */
+      .dots {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .dot.active {
+        background-color: white;
+      }
+
+      /* Hero text overlay */
+      .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+        transform: translateY(-50%);
+      }
+
+      .hero-overlay h1 {
+        color: white;
+        font-size: 4rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        margin: 0;
+        padding: 20px;
+        display: inline-block;
       }
 
       /* Style to match the About Carom Café heading */
@@ -81,6 +193,9 @@
             src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=1200"
             alt="Burger and Fries"
           />
+        </div>
+        <div class="hero-overlay">
+          <h1>Menu</h1>
         </div>
         <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
         <button class="slide-btn next" onclick="moveSlide(1)">❯</button>

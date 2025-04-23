@@ -11,100 +11,43 @@
     />
     <style>
       .leagues-hero {
-        height: 85vh; /* Increased from 75vh to 85vh for more vertical space */
+        height: 100vh; /* Full viewport height for maximum impact */
         background-color: #000; /* Dark background for any letterboxing */
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
         position: relative;
+        padding: 0; /* Remove padding to allow full expansion */
+        margin: 0;
       }
 
-      /* For the hero video */
-      .leagues-hero-video {
-        width: 100%; /* Ensure full width */
-        height: auto; /* Auto height to maintain aspect ratio */
-        max-height: 100%; /* Don't exceed container height */
-        object-fit: cover; /* Cover the area without stretching */
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-      }
-
-      /* For the hero images (initially hidden) */
+      /* Hero image styling */
       .leagues-hero-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transition: opacity 1s ease;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        object-fit: cover; /* Cover to fill the entire space */
+        object-position: center 25%; /* Adjusted to better center on faces */
       }
 
-      /* When image is active */
-      .leagues-hero-image.active {
-        opacity: 1;
-        z-index: 2;
-      }
-
-      /* Slideshow navigation buttons */
-      .slide-btn {
+      /* Hero text overlay */
+      .hero-overlay {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        background-color: transparent;
-        color: white;
-        border: none;
-        font-size: 32px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        transition: transform 0.3s ease, text-shadow 0.3s ease;
-        padding: 20px;
-      }
-
-      .slide-btn:hover {
-        transform: translateY(-50%) scale(1.2);
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-      }
-
-      .slide-btn.prev {
-        left: 20px;
-      }
-
-      .slide-btn.next {
-        right: 20px;
-      }
-
-      /* Dots for slideshow navigation */
-      .dots {
-        position: absolute;
-        bottom: 20px;
+        left: 0;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        z-index: 10;
+        text-align: center;
+        z-index: 5;
+        transform: translateY(-50%);
       }
 
-      .dot {
-        width: 12px;
-        height: 12px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .dot.active {
-        background-color: white;
+      .hero-overlay h1 {
+        color: white;
+        font-size: 4rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        margin: 0;
+        padding: 20px;
+        display: inline-block;
       }
 
       /* Style to match the About Carom Café heading */
@@ -150,38 +93,13 @@
     </header>
 
     <section class="leagues-hero">
-      <video
-        id="leagues-video"
-        class="leagues-hero-video"
-        autoplay
-        muted
-        playsinline
-      >
-        <source src="images/leagues/break.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
       <img
-        id="leagues-image-1"
-        src="images/leagues/billiards_hall.jpg"
-        alt="Carom Cafe Billiards Hall"
-        class="leagues-hero-image"
-      />
-      <img
-        id="leagues-image-2"
-        src="images/leagues/tournament_group2.jpg"
+        src="images/leagues/DF5A5927.jpg"
         alt="Carom Cafe Tournament Group"
         class="leagues-hero-image"
       />
-
-      <!-- Navigation buttons -->
-      <button class="slide-btn prev" onclick="previousSlide()">❮</button>
-      <button class="slide-btn next" onclick="nextSlide()">❯</button>
-
-      <!-- Dots -->
-      <div class="dots">
-        <span class="dot active" onclick="goToSlide(0)"></span>
-        <span class="dot" onclick="goToSlide(1)"></span>
-        <span class="dot" onclick="goToSlide(2)"></span>
+      <div class="hero-overlay">
+        <h1>Leagues & Tournaments</h1>
       </div>
     </section>
 
@@ -221,6 +139,13 @@
             </li>
           </ul>
         </div>
+      </div>
+      <div class="tournament-grid">
+        <img
+          src="images/DF5A5927.jpg"
+          alt="Carom Cafe Tournament Group"
+          class="tournament-image"
+        />
       </div>
     </section>
 
@@ -263,168 +188,5 @@
     </footer>
 
     <script src="src/script.js"></script>
-    <script>
-      // Global variables for slideshow
-      let slides;
-      let currentSlide = 0;
-      let slideTimer;
-
-      // Set up slideshow between video and images
-      document.addEventListener("DOMContentLoaded", function () {
-        const video = document.getElementById("leagues-video");
-        const image1 = document.getElementById("leagues-image-1");
-        const image2 = document.getElementById("leagues-image-2");
-        slides = [video, image1, image2];
-
-        // Set video to play at slower speed
-        video.playbackRate = 0.6;
-
-        // When video ends, auto advance to next slide
-        video.addEventListener("ended", function () {
-          nextSlide();
-        });
-
-        // Initialize the slideshow
-        updateSlideInfo();
-        startSlideTimer();
-      });
-
-      // Function to update dots and current slide info
-      function updateSlideInfo() {
-        // Update dots
-        const dots = document.querySelectorAll(".dot");
-        dots.forEach((dot, index) => {
-          if (index === currentSlide) {
-            dot.classList.add("active");
-          } else {
-            dot.classList.remove("active");
-          }
-        });
-      }
-
-      // Function to start the slide timer
-      function startSlideTimer() {
-        clearTimeout(slideTimer);
-
-        // Set timeout based on current slide
-        const timeoutDuration =
-          currentSlide === 0
-            ? slides[0].duration * 1000 // Video duration
-            : 7000; // 7 seconds for images
-
-        slideTimer = setTimeout(nextSlide, timeoutDuration);
-      }
-
-      // Go to next slide
-      function nextSlide() {
-        // Hide current slide
-        if (currentSlide !== 0) {
-          // If current slide is an image, hide it
-          slides[currentSlide].classList.remove("active");
-        } else {
-          // If current slide is video, pause it
-          slides[0].pause();
-        }
-
-        // Advance to next slide
-        currentSlide = (currentSlide + 1) % slides.length;
-
-        // Show new slide
-        showCurrentSlide();
-      }
-
-      // Go to previous slide
-      function previousSlide() {
-        // Hide current slide
-        if (currentSlide !== 0) {
-          // If current slide is an image, hide it
-          slides[currentSlide].classList.remove("active");
-        } else {
-          // If current slide is video, pause it
-          slides[0].pause();
-        }
-
-        // Move to previous slide
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-
-        // Show new slide
-        showCurrentSlide();
-      }
-
-      // Go directly to a specific slide
-      function goToSlide(index) {
-        if (index === currentSlide) return;
-
-        // Hide current slide
-        if (currentSlide !== 0) {
-          // If current slide is an image, hide it
-          slides[currentSlide].classList.remove("active");
-        } else {
-          // If current slide is video, pause it
-          slides[0].pause();
-        }
-
-        // Set new slide index
-        currentSlide = index;
-
-        // Show new slide
-        showCurrentSlide();
-      }
-
-      // Show the current slide
-      function showCurrentSlide() {
-        if (currentSlide === 0) {
-          // If slide is video, reset and play it
-          slides[0].currentTime = 0;
-          slides[0].play();
-        } else {
-          // If slide is image, show it
-          slides[currentSlide].classList.add("active");
-        }
-
-        // Update dots and start timer
-        updateSlideInfo();
-        startSlideTimer();
-      }
-
-      // Carousel controls (if needed elsewhere)
-      window.moveSlide = function (n) {
-        const slideIndexElement = document.querySelector(".carousel");
-        let slideIndex = parseInt(
-          slideIndexElement.getAttribute("data-slide-index") || 1
-        );
-        showSlides((slideIndex += n));
-      };
-
-      window.currentSlide = function (n) {
-        showSlides(n);
-      };
-
-      function showSlides(n) {
-        let slides = document.getElementsByClassName("carousel-slide");
-        let dots = document.getElementsByClassName("dot");
-        const slideIndexElement = document.querySelector(".carousel");
-
-        if (n > slides.length) {
-          n = 1;
-        }
-        if (n < 1) {
-          n = slides.length;
-        }
-
-        slideIndexElement.setAttribute("data-slide-index", n);
-
-        for (let i = 0; i < slides.length; i++) {
-          slides[i].classList.remove("active");
-        }
-
-        for (let i = 0; i < dots.length; i++) {
-          dots[i].classList.remove("active");
-        }
-
-        slides[n - 1].classList.add("active");
-        dots[n - 1].classList.add("active");
-      }
-    </script>
   </body>
 </html>
