@@ -552,6 +552,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const tournamentPopup = document.getElementById("tournament-popup");
   const closePopupBtn = document.querySelector(".close-popup");
 
+  // Show the popup when the page loads
+  if (tournamentPopup) {
+    tournamentPopup.style.display = "flex";
+  }
+
   // Close popup when clicking the X button
   if (closePopupBtn && tournamentPopup) {
     closePopupBtn.addEventListener("click", function () {
