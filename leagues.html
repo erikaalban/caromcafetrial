@@ -58,14 +58,133 @@
         margin-bottom: 40px;
       }
 
-      /* Add spacing to match the about section on home page */
-      .leagues {
-        padding: 0 40px 100px 40px;
+      /* Categories styling to match home page */
+      .leagues-categories {
+        padding: 40px 0;
+        background-color: white;
+      }
+
+      .leagues-container {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      .leagues-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .league-card {
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        display: flex;
+        height: 350px;
+        border-radius: 10px;
+      }
+
+      .league-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .league-image {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .league-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .league-card:hover .league-image img {
+        transform: scale(1.05);
+      }
+
+      .league-content {
+        width: 50%;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .league-content h3 {
+        color: var(--primary-color);
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+      }
+
+      .league-content p {
+        color: var(--dark-color);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .league-content ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .league-content ul li {
+        color: var(--dark-color);
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .league-content ul li:before {
+        content: "•";
+        color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        font-size: 1.2rem;
+        line-height: 1;
       }
 
       /* Section for the heading with proper spacing */
       .leagues-heading-section {
-        padding: 40px 40px 0 40px;
+        padding: 60px 40px 0 40px;
+        background-color: white;
+      }
+
+      /* Section divider */
+      .section-divider {
+        width: 80%;
+        max-width: 800px;
+        height: 1px;
+        background-color: #eee;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 900px) {
+        .league-card {
+          flex-direction: column;
+          height: auto;
+        }
+
+        .league-image,
+        .league-content {
+          width: 100%;
+        }
+
+        .league-image {
+          height: 250px;
+        }
+
+        .league-content {
+          padding: 30px;
+        }
       }
     </style>
   </head>
@@ -104,48 +223,112 @@
     </section>
 
     <section class="leagues-heading-section">
-      <h2 class="leagues-heading">Leagues & Tournaments</h2>
+      <h2 class="leagues-heading">Leagues</h2>
     </section>
 
-    <section class="leagues">
-      <div class="leagues-content">
-        <div class="league-info">
-          <h3>Weekly Leagues</h3>
-          <ul>
-            <li>
-              <strong>Tuesday Carom League</strong><br />
-              Intermediate to advanced level<br />
-              Starts at 7:00 PM
-            </li>
-            <li>
-              <strong>Wednesday 8-Ball League</strong><br />
-              Beginner to advanced level<br />
-              Starts at 7:00 PM
-            </li>
-          </ul>
-        </div>
-        <div class="league-info">
-          <h3>Weekly Tournaments</h3>
-          <ul>
-            <li>
-              <strong>Monday 9-Ball Tournament</strong><br />
-              Hosted by MVP Pro Am Tour<br />
-              Starts at 7:00 PM
-            </li>
-            <li>
-              <strong>Thursday 3-Cushion Tournament</strong><br />
-              All skill levels welcome<br />
-              Starts at 7:00 PM
-            </li>
-          </ul>
+    <section class="leagues-categories">
+      <div class="leagues-container">
+        <div class="leagues-grid">
+          <div class="league-card">
+            <div class="league-image">
+              <img
+                src="images/leagues/jdamian_2020-11-21_01.jpg"
+                alt="Tuesday Carom League"
+              />
+            </div>
+            <div class="league-content">
+              <h3>Tuesday Carom League</h3>
+              <p>
+                Join our competitive carom billiards league for intermediate to
+                advanced players:
+              </p>
+              <ul>
+                <li>Weekly matches every Tuesday</li>
+                <li>Starts at 7:00 PM</li>
+                <li>Intermediate to advanced level</li>
+                <li>Prizes for season winners</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="league-card">
+            <div class="league-image">
+              <img
+                src="images/leagues/DSC00358.jpg"
+                alt="Wednesday 8-Ball League"
+              />
+            </div>
+            <div class="league-content">
+              <h3>Wednesday 8-Ball League</h3>
+              <p>
+                Our popular 8-ball league welcomes players of all skill levels:
+              </p>
+              <ul>
+                <li>Weekly matches every Wednesday</li>
+                <li>Starts at 7:00 PM</li>
+                <li>Beginner to advanced levels</li>
+                <li>Friendly competition</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="tournament-grid">
-        <img
-          src="images/DF5A5927.jpg"
-          alt="Carom Cafe Tournament Group"
-          class="tournament-image"
-        />
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="leagues-heading-section">
+      <h2 class="leagues-heading">Tournaments</h2>
+    </section>
+
+    <section class="leagues-categories">
+      <div class="leagues-container">
+        <div class="leagues-grid">
+          <div class="league-card">
+            <div class="league-image">
+              <img
+                src="images/index/pool_tables.jpg"
+                alt="Monday 9-Ball Tournament"
+              />
+            </div>
+            <div class="league-content">
+              <h3>Monday 9-Ball Tournament</h3>
+              <p>Test your skills in our weekly 9-ball tournaments:</p>
+              <ul>
+                <li>
+                  Hosted by
+                  <a
+                    href="https://www.facebook.com/mvproamtour/"
+                    target="_blank"
+                    >MVP Pro Am Tour</a
+                  >
+                </li>
+                <li>Every Monday at 7:00 PM</li>
+                <li>100% payout</li>
+                <li>Single elimination format</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="league-card">
+            <div class="league-image">
+              <img
+                src="images/index/DF5A0791-Enhanced-NR-2.jpg"
+                alt="Thursday 3-Cushion Tournament"
+              />
+            </div>
+            <div class="league-content">
+              <h3>Thursday 3-Cushion Tournament</h3>
+              <p>Join our 3-cushion carom billiards tournament:</p>
+              <ul>
+                <li>All skill levels welcome</li>
+                <li>Every Thursday at 7:00 PM</li>
+                <li>100% payout</li>
+                <li>Single elimination format</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
