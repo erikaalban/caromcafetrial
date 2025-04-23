@@ -549,24 +549,22 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   // Tournament popup functionality
-  const popup = document.getElementById("tournament-popup");
-  if (popup) {
-    const popupCloseBtn = document.querySelector(".close-popup");
+  const tournamentPopup = document.getElementById("tournament-popup");
+  const closePopupBtn = document.querySelector(".close-popup");
 
-    // Show popup
-    popup.style.display = "flex";
+  // Close popup when clicking the X button
+  if (closePopupBtn && tournamentPopup) {
+    closePopupBtn.addEventListener("click", function () {
+      tournamentPopup.style.display = "none";
+    });
+  }
 
-    // Close popup when clicking the X
-    if (popupCloseBtn) {
-      popupCloseBtn.addEventListener("click", function () {
-        popup.style.display = "none";
-      });
-    }
-
-    // Close popup when clicking outside
-    window.addEventListener("click", function (event) {
-      if (event.target === popup) {
-        popup.style.display = "none";
+  // Close popup when clicking outside the popup content
+  if (tournamentPopup) {
+    tournamentPopup.addEventListener("click", function (event) {
+      // Check if the click was directly on the popup background (not on the content)
+      if (event.target === tournamentPopup) {
+        tournamentPopup.style.display = "none";
       }
     });
   }
