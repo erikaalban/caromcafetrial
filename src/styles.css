@@ -1913,19 +1913,17 @@ html {
    ======================================== */
 @media (min-width: 1600px) {
   .container {
-    max-width: 1500px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .header-container {
     max-width: 1500px;
   }
 
-  h1 {
-    font-size: 4.5rem;
-  }
-
-  h2 {
-    font-size: 3rem;
+  .hero-content {
+    max-width: 900px;
   }
 
   .hero-content h1 {
@@ -1936,10 +1934,26 @@ html {
     font-size: 1.8rem;
   }
 
-  .about-content,
-  .contact-content,
+  h2 {
+    font-size: 3rem;
+  }
+
+  .about-content {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .leagues-content {
     max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-content {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .table-section {
@@ -1959,47 +1973,22 @@ html {
     max-width: 1400px;
     margin: 0 auto;
   }
+
+  .table-categories .container {
+    max-width: 1500px;
+  }
 }
 
 /* ========================================
    ULTRAWIDE SCREENS (2200px+)
    ======================================== */
 @media (min-width: 2200px) {
-  body {
-    background: #1a1a1a;
-  }
-
-  header {
-    max-width: 2000px;
-    margin: 0 auto;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .hero,
-  .about,
-  .tables,
-  .leagues,
-  .menu,
-  .contact,
-  .table-categories,
-  footer {
-    max-width: 1900px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.4);
-  }
-
   .container {
-    max-width: 1600px;
+    max-width: 1700px;
   }
 
-  h1 {
-    font-size: 5rem;
-  }
-
-  h2 {
-    font-size: 3.5rem;
+  .hero-content {
+    max-width: 1000px;
   }
 
   .hero-content h1 {
@@ -2008,6 +1997,14 @@ html {
 
   .hero-content p {
     font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+  }
+
+  .about-content {
+    max-width: 1600px;
   }
 
   .about-stats {
@@ -2028,8 +2025,16 @@ html {
     padding: 50px;
   }
 
+  .table-categories .container {
+    max-width: 1800px;
+  }
+
   .category-card {
     height: 500px;
+  }
+
+  .leagues-content {
+    max-width: 1600px;
   }
 
   .leagues-title {
@@ -2044,9 +2049,12 @@ html {
     font-size: 2.2rem;
   }
 
+  .contact-content {
+    max-width: 1600px;
+  }
+
   .footer-content {
     max-width: 1600px;
-    gap: 200px;
   }
 }
 
@@ -2054,19 +2062,12 @@ html {
    4K SCREENS (2800px+)
    ======================================== */
 @media (min-width: 2800px) {
-  .hero,
-  .about,
-  .tables,
-  .leagues,
-  .menu,
-  .contact,
-  .table-categories,
-  footer {
-    max-width: 2300px;
+  .container {
+    max-width: 2000px;
   }
 
-  .container {
-    max-width: 1900px;
+  .hero-content {
+    max-width: 1200px;
   }
 
   .hero-content h1 {
@@ -2075,5 +2076,19 @@ html {
 
   h2 {
     font-size: 4rem;
+  }
+
+  .about-content,
+  .leagues-content,
+  .contact-content {
+    max-width: 1900px;
+  }
+
+  .table-categories .container {
+    max-width: 2100px;
+  }
+
+  .footer-content {
+    max-width: 1900px;
   }
 }
