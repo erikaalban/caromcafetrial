@@ -949,6 +949,17 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-bottom a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+  color: #d4af37;
+  text-decoration: underline;
+}
+
 .footer-hours {
   flex: 1;
 }
