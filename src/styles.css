@@ -1907,3 +1907,173 @@ html {
   color: #333333;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
+
+/* ========================================
+   LARGE SCREENS (1600px+)
+   ======================================== */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1500px;
+  }
+
+  .header-container {
+    max-width: 1500px;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  .hero-content h1 {
+    font-size: 5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.8rem;
+  }
+
+  .about-content,
+  .contact-content,
+  .leagues-content {
+    max-width: 1400px;
+  }
+
+  .table-section {
+    width: 450px;
+    height: 450px;
+  }
+
+  .category-card {
+    height: 450px;
+  }
+
+  .category-content {
+    padding: 80px;
+  }
+
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* ========================================
+   ULTRAWIDE SCREENS (2200px+)
+   ======================================== */
+@media (min-width: 2200px) {
+  body {
+    background: #1a1a1a;
+  }
+
+  header {
+    max-width: 2000px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero,
+  .about,
+  .tables,
+  .leagues,
+  .menu,
+  .contact,
+  .table-categories,
+  footer {
+    max-width: 1900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.4);
+  }
+
+  .container {
+    max-width: 1600px;
+  }
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+  }
+
+  .hero-content h1 {
+    font-size: 5.5rem;
+  }
+
+  .hero-content p {
+    font-size: 2rem;
+  }
+
+  .about-stats {
+    gap: 50px;
+  }
+
+  .stat-item {
+    padding: 50px;
+  }
+
+  .stat-item i {
+    font-size: 3.5rem;
+  }
+
+  .table-section {
+    width: 500px;
+    height: 500px;
+    padding: 50px;
+  }
+
+  .category-card {
+    height: 500px;
+  }
+
+  .leagues-title {
+    font-size: 3.5rem;
+  }
+
+  .league-info {
+    padding: 50px;
+  }
+
+  .league-info h3 {
+    font-size: 2.2rem;
+  }
+
+  .footer-content {
+    max-width: 1600px;
+    gap: 200px;
+  }
+}
+
+/* ========================================
+   4K SCREENS (2800px+)
+   ======================================== */
+@media (min-width: 2800px) {
+  .hero,
+  .about,
+  .tables,
+  .leagues,
+  .menu,
+  .contact,
+  .table-categories,
+  footer {
+    max-width: 2300px;
+  }
+
+  .container {
+    max-width: 1900px;
+  }
+
+  .hero-content h1 {
+    font-size: 6rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
+}
